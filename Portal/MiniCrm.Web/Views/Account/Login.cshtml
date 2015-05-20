@@ -1,0 +1,141 @@
+﻿@using MiniCrm.Web.Models
+
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Logowanie";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery-2.1.3.js")"></script>
+    <title>@ViewBag.Title - Inter-Warsztat</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <title>Login</title>
+</head>
+<body>
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+    @Html.AntiForgeryToken()
+
+    <div id="login-overlay" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+       
+                <h4 class="modal-title" id="myModalLabel">Zaloguj się do Inter-Warsztat</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="well">
+                            <form id="loginForm" method="POST" action="/Account/Login/" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="Email" class="control-label">Email</label>
+                                    <input type="text" class="form-control" id="Email" name="Email" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">Hasło</label>
+                                    <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" id="remember"> Zapamiętaj mnie
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="lead">Zgłoś się do nas !<br>Konto otrzymasz <span class="text-success">za darmo</span></p>
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> Zarządzanie naprawami</li>
+                            <li><span class="fa fa-check text-success"></span> Historia napraw</li>
+                            <li><span class="fa fa-check text-success"></span> Statusy napraw</li>
+                            <li><span class="fa fa-check text-success"></span> Skorzystaj z promocji <br /><small>(tylko dla nowych klientów)</small></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    @*<div class="body-content container" style="padding-top:170px">
+        <div class="panel panel-primary" style="margin: auto; width: 70%;">
+            <div class="panel-heading">Zaloguj się do Inter-Warsztat</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:inline-block">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="display:inline-block">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Log in" class="btn btn-default" />
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </div>
+                    <div class="">
+                        
+                            <div class="" style="color: indigo; padding-top:50px">
+<img style="width:250px;" src="http://s4.postimg.org/ye61wsj8d/onlinelogomaker_011815_1355.png" />
+
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+
+
+
+            @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

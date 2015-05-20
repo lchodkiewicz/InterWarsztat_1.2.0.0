@@ -1,0 +1,90 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ parameter name="classname" type="System.String" #>
+<#
+string classname = "Mail";
+#>
+namespace EnzoMiniCrm.Model
+{
+using EnzoMiniCrm.Model;
+using log4net;
+using PetaPoco;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+    /// <summary>
+    /// This class describes the data layer related to <#= classname #>.
+    /// </summary>
+    /// <history>
+    ///   <change author=`Auto Generated` date=<#= DateTime.Now.ToString("dd/MM/yyyy") #>>Original Version</change>
+    /// </history>
+    public partial class <#= classname #>Repository
+    {
+	 protected static readonly ILog _log = LogManager.GetLogger("<#= classname #>Repository");
+
+        private Database _db;
+        public <#= classname #>Repository(Database db)
+        {
+            _db = db;
+        }
+        public string Save(<#= classname #> entity<#= classname #>, bool isNew)
+        {
+            StringBuilder result = new StringBuilder();
+            //TODO Validation???
+
+            try
+            {
+                if (isNew)
+                {
+                    _db.Insert(entity<#= classname #>);
+                }
+                else
+                {
+                    _db.Save(entity<#= classname #>);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Append(ex.Message);
+                _log.Error(ex.Message);
+
+            }
+            return result.ToString();
+        }
+        //public string Delete(<#= classname #> entity)
+        //{
+        //    var finalResult = "";
+        //    //ValidationResult results = validator.Validate(entity);
+        //    if (!results.IsValid)
+        //    {
+        //        finalResult = results.Errors.Select(i => i.ErrorMessage).ToString(",");
+        //    }
+        //    else
+        //    {
+        //        _db.Delete(entity);
+        //    }
+        //    return finalResult;
+        //}
+
+        public <#= classname #> GetById(string id)
+        {
+            if (!String.IsNullOrEmpty(id))
+            {
+                var entity = _db.SingleOrDefault<<#= classname #>>((new Sql("SELECT t.* FROM [dbo].[<#= classname #>s] t WHERE t.<#= classname #>ID = @0", id)));
+                return entity;
+            }
+            else
+            {
+                return new <#= classname #>();
+            }
+        }
+
+	}
+}

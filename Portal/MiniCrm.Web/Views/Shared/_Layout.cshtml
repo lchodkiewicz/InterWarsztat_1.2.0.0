@@ -1,0 +1,112 @@
+﻿@using System.Web
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        td.details-control {
+            background: url('../resources/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.shown td.details-control {
+            background: url('../resources/details_close.png') no-repeat center center;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery-2.1.3.js")"></script>
+    <title>@ViewBag.Title - Inter-Warsztat</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("JavaScript", required: false)
+</head>
+<body style="padding: 0">
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Inter-Warsztat", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("O nas", "About", "Home")</li>
+                    <li>@Html.ActionLink("Oferta", "OfferList", "Offer")</li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (Context.User.IsInRole("admin"))
+                        {
+                            if (Context.User.IsInRole("admin"))
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mailing <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Pokaż wysłane e-maile", "Mailing", "Mailing")</li>
+
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Naprawy <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Zarządzaj", "Repair", "Repair")</li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Klient<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Dodaj klienta", "RegisterCustomer", "Account")</li>
+                                        <li>@Html.ActionLink("Zarządzaj", "Customer", "Customer")</li>
+                                    </ul>
+                                </li>
+                            }
+
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pracownik<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Dodaj pracownika", "RegisterEmployee", "Account")</li>
+                                    <li>@Html.ActionLink("Zarządzaj", "Employee", "Employee")</li>
+                                </ul>
+                            </li>
+                        }
+
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="body-content container">
+        @RenderBody()
+    </div>
+    <div style="padding-top: 30px">
+        <footer div class="navbar-fixed-bottom" style="font-size: 11px; margin-top: 100%; font-weight: 200; line-height: 2.1428571435; color: inherit; background-color: #eeeeee;">
+            <div style="text-align:right">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseFooter" aria-expanded="false" aria-controls="collapseFooter">
+                    CopyRights
+                </button>
+            </div>
+            <div class="collapse" id="collapseFooter">
+                <div class="well">
+                    <p>Copyright ©2015, All Rights Reserved @DateTime.Now.Year - Enzo IT Sollution - Chodkiewicz & Ostrowski</p>
+                    <p>"Z nami niepewność zaczyna się wczoraj..."</p>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

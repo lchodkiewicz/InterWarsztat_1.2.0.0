@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "OfferList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Angular.js"></script>
+<script src="~/Scripts/OfferList.js"></script>
+
+<div ng-app="offerScope" ng-controller="offerController">
+    <div>
+        <div style="padding-bottom: 30px; padding-top: 60px; text-align: center">
+
+            <input class="form-control" style="display: inline-block;" type="search" ng-model="query" placeholder="Szukaj" />
+        </div>
+
+        <table style="background-color: transparent;" rules="none;" valign="top" class="table table-bordered panel panel-primary">
+            <thead class="panel-heading">
+                <tr>
+                    <th>CENNIK</th>
+                    <th style="width: 70px; text-align: left">PLN</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="animate-repeat" ng-repeat="offer in mock |filter:query">
+                    <td>{{offer.serviceName}}</td>
+                    <td>{{offer.serviceCost}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

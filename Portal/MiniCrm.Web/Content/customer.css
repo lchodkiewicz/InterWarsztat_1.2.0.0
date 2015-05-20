@@ -1,0 +1,19 @@
+.search {
+ display: inline-block; 
+}
+.searchInput {
+ display: inline-block; 
+ width: 15%;
+}
+
+.input {
+ display: inline-block; 
+}
+
+.articleTitle {
+    padding-bottom: 30px;
+    text-align:center;
+    font-family:'Comic Sans MS';
+    font-weight:700;
+}
+

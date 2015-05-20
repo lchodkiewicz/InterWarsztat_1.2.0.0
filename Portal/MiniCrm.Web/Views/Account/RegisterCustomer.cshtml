@@ -1,0 +1,113 @@
+﻿@using MiniCrm.Web.Models;
+@model MiniCrm.Web.Models.MyRegisterViewModelForCustomer
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<object> items = new List<object>(){
+        new {text = "Administrator", value= "admin"},
+        new {text = "Klient", value= "customer"},
+    };
+}
+
+
+@using (Html.BeginForm("RegisterCustomer", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Tworzenie konta klienta</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.LoginData.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.LoginData.Email, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.LastName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CustomerData.LastName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.FirstName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CustomerData.FirstName, new { @class = "form-control" })
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.Country, new { @class = "col-md-6 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CustomerData.Country, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.Region, new { @class = "col-md-6 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CustomerData.Region, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.City, new { @class = "col-md-6 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CustomerData.City, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.Address, new { @class = "col-md-6 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CustomerData.Address, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.PostalCode, new { @class = "col-md-6 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CustomerData.PostalCode, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+  
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerData.Phone, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CustomerData.Phone, new { @class = "form-control" })
+                </div>
+
+                @Html.LabelFor(m => m.CustomerData.Fax, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CustomerData.Fax, new { @class = "form-control" })
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Załóż konto" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

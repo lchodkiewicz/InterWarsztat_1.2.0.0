@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enzo.Mechanic", "Enzo.Mechanic", "{E0D3D40F-65EE-4CEF-BE5E-88F70840C8C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCrm.Web", "Web\MiniCrm.Web\MiniCrm.Web.csproj", "{2F545881-1EE7-467D-A932-F95CF8D71C9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mechanic.BL", "Logic\Mechanic.BL\Mechanic.BL.csproj", "{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A4E6E942-92DD-4A57-9B98-F52D9257A762}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnzoFramework_v1.001", "EnzoFramework_v1.001", "{356BF917-0E90-4F7A-BBEA-455F421436FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnzoMailEngine", "EnzoFramework_v1.001\ClassLibrary1\EnzoMailEngine.csproj", "{6827AA57-9586-481D-8290-CBAC64673025}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F545881-1EE7-467D-A932-F95CF8D71C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F545881-1EE7-467D-A932-F95CF8D71C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F545881-1EE7-467D-A932-F95CF8D71C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F545881-1EE7-467D-A932-F95CF8D71C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6827AA57-9586-481D-8290-CBAC64673025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6827AA57-9586-481D-8290-CBAC64673025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6827AA57-9586-481D-8290-CBAC64673025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6827AA57-9586-481D-8290-CBAC64673025}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F545881-1EE7-467D-A932-F95CF8D71C9C} = {E0D3D40F-65EE-4CEF-BE5E-88F70840C8C4}
+		{C11A0F3B-0BB2-4D63-A2ED-EA2FF66EE873} = {E0D3D40F-65EE-4CEF-BE5E-88F70840C8C4}
+		{6827AA57-9586-481D-8290-CBAC64673025} = {356BF917-0E90-4F7A-BBEA-455F421436FB}
+	EndGlobalSection
+EndGlobal

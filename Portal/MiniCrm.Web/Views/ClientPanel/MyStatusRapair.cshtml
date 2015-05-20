@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "MyStatusRapair";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+}
+
+<h2>Statusy napraw dla moich pojazdów</h2>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/jtable/themes/lightcolor/gray/jtable.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script src="~/Scripts/jquery-ui-1.9.2.min.js"></script>
+<script src="~/Scripts/jtable/jquery.jtable.js"></script>
+
+
+
+<div style="margin-top:15px">
+    <div id="MyPermissionTableContainer"></div>
+</div>
+<script src="~/Scripts/jtable/localization/jquery.jtable.pl.js"></script>
+<script>
+    var usrName = "@HttpContext.Current.User.Identity.Name";
+</script>
+<script id="iu8">
+
+    $(document).ready(function () {
+        $('#MyPermissionTableContainer').jtable({
+            title: 'Lista zgód na naprawę',
+            paging: true, //Enable paging
+            sorting: true, //Enable sorting
+            defaultSorting: 'Name ASC',
+            //openChildAsAccordion: true, //Enable this line to show child tabes as accordion style
+            actions: {
+                listAction: '/ClientPanel/ShowRepairsStatusList?CustomerID=' + usrName,
+                 },
+            fields: {
+
+
+                RepairStatusID: {
+                    title: 'Id',
+                    type: 'hidden',
+                    title: 'Id',
+                    width: '5%',
+                    key: true,
+                    create: true
+                },
+                RepairId: {
+                    type: 'hidden'
+
+                },
+
+
+                VehicleID: {
+                    title: 'Pojazd',
+                    width: '10%'
+
+
+
+                },
+
+                Status: {
+                    title: 'Status',
+                    width: '20%',
+                    options: { '1': 'Przyjęty do naprawy', '2': 'W trakcie Naprawy', '3': 'Naprawiony', '4': 'W oczekiwaniu na decyzje klienta', '5': 'W oczekiwaniu na części' }
+
+                },
+                DescribeRepair: {
+                    title: 'Notatka naprawy',
+                    width: '20%',
+                    type: 'textarea',
+
+
+                },
+                Permission: {
+                    title: 'Zgodan',
+                    width: '10%',
+                    options: { '1': 'Automat', '2': 'Zgoda Klienta', '3': 'Odrzucona Przez Klienta', '4': 'Oczekuje na akceptacje', '5': 'Odłóżna później' }
+
+                }
+            }
+        });
+
+        //Load MyPermission list from server
+        $('#MyPermissionTableContainer').jtable('load');
+
+    });
+</script>
+
+
