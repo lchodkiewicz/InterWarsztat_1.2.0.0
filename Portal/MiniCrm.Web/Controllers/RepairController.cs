@@ -32,13 +32,15 @@ namespace MiniCrm.Web.Controllers
         [Authorize(Roles = "admin, employee")]
         public JsonResult ShowRepairList(int StatusId = 0, int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
-            
+            int totalRecords;
             using (var db = new Database("DefaultConnection"))
             {
                 try
                 {
-                    var totalRecords = db.Fetch<Mail>("Select * from dbo.Repairs");
+                   
                     var sql = PetaPoco.Sql.Builder.Append("Select * from dbo.Repairs ");
+                    totalRecords = (db.Query<Mail>(sql)).Count();
+
                     if (dictionaryStatusesRepair.HasKey(StatusId))
                     {
                         sql.Append("Where Status = @0", StatusId);
