@@ -33,19 +33,28 @@ namespace MiniCrm.Web.Controllers
             }
         }
         [HttpPost]
-        public JsonResult ShowVehicleList(string customerID)
+        public JsonResult ShowVehicleList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
-            try
+            int totalRecords = 0;
+            string customerId = User.Identity.Name;
+            using (var db = new Database("DefaultConnection"))
             {
-                using (var db = new Database("DefaultConnection"))
+                try
                 {
-                    var result = db.Fetch<Vehicle>("Select * from dbo.Vehicles where CustomerID = @0", customerID);
-                    return Json(new { Result = "OK", Records = result });
+                    var sql = PetaPoco.Sql.Builder.Append("Select * from dbo.Vehicles WHERE CustomerID = @0", customerId);
+                    totalRecords = (db.Query<Vehicle>(sql)).Count();
+
+
+                    sql.Append("ORDER BY VehicleID OFFSET @0 ROWS FETCH NEXT @1 ROWS ONLY", jtStartIndex, jtPageSize);
+                    var result = db.Query<Vehicle>(sql);
+
+                    return Json(new { Result = "OK", Records = result, TotalRecordCount = totalRecords });
                 }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "ERROR", Message = ex.Message });
+
+                catch (Exception ex)
+                {
+                    return Json(new { Result = "ERROR", Message = ex.Message });
+                }
             }
         }
         

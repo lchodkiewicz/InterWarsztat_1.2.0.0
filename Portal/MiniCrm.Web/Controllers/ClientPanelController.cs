@@ -45,33 +45,50 @@ namespace MiniCrm.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "customer")]
-        public JsonResult ShowRepairsStatusList(string customerID)
+        public JsonResult ShowRepairsStatusList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
+            int totalRecords = 0;
+            string customerId = User.Identity.Name;
             using (var db = new Database("DefaultConnection"))
             {
                 try
                 {
-                    var result = db.Fetch<RepairsStatus>("Select * from dbo.RepairsStatus where CustomerId = @0", customerID);
-                    return Json(new { Result = "OK", Records = result });
+                    var sql = PetaPoco.Sql.Builder.Append("Select * from dbo.RepairsStatus WHERE CustomerID = @0", customerId);
+                    totalRecords = (db.Query<RepairsStatus>(sql)).Count();
+
+
+                    sql.Append("ORDER BY RepairsStatusID OFFSET @0 ROWS FETCH NEXT @1 ROWS ONLY", jtStartIndex, jtPageSize);
+                    var result = db.Query<RepairsStatus>(sql);
+
+                    return Json(new { Result = "OK", Records = result, TotalRecordCount = totalRecords });
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex);
-                    return Json(new { Result = "ERROR", Message = _message });
+                    return Json(new { Result = "ERROR", Message = ex.Message });
+                    //TODO add log4net_log.Error(ex.ToString());
+
+                    throw;
                 }
             }
         }
 
         [HttpPost]
         [Authorize(Roles = "customer")]
-        public JsonResult ShowRepairsStatusListToAccept(string customerID)
+        public JsonResult ShowRepairsStatusListToAccept(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
+            int totalRecords = 0;
+            string customerId = User.Identity.Name;
             using (var db = new Database("DefaultConnection"))
             {
                 try
                 {
-                    var result = db.Fetch<RepairsStatus>("Select * from dbo.RepairsStatus where CustomerId = @0 and Permission= 4", customerID);
-                    return Json(new { Result = "OK", Records = result });
+                    var sql = PetaPoco.Sql.Builder.Append("Select * from dbo.RepairsStatus WHERE CustomerID = @0 AND Permission = 4", customerId); //Status 4 do akceptacji
+                    totalRecords = (db.Query<RepairsStatus>(sql)).Count();
+
+                    sql.Append("ORDER BY RepairsStatusID OFFSET @0 ROWS FETCH NEXT @1 ROWS ONLY", jtStartIndex, jtPageSize);
+                    var result = db.Query<RepairsStatus>(sql);
+
+                    return Json(new { Result = "OK", Records = result, TotalRecordCount = totalRecords });
                 }
                 catch (Exception ex)
                 {
@@ -104,14 +121,21 @@ namespace MiniCrm.Web.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "customer")]
-        public JsonResult ShowRepairsList(string customerID)
+        public JsonResult ShowRepairsList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
+            int totalRecords = 0;
+            string customerId = User.Identity.Name;
             using (var db = new Database("DefaultConnection"))
             {
                 try
                 {
-                    var result = db.Fetch<Repair>("Select * from dbo.Repairs where CustomerId = @0", customerID);
-                    return Json(new { Result = "OK", Records = result });
+                    var sql = PetaPoco.Sql.Builder.Append("Select * from dbo.Repairs WHERE CustomerID = @0 ", customerId);
+                    totalRecords = (db.Query<Repair>(sql)).Count();
+
+                    sql.Append("ORDER BY RepairID OFFSET @0 ROWS FETCH NEXT @1 ROWS ONLY", jtStartIndex, jtPageSize);
+                    var result = db.Query<Repair>(sql);
+
+                    return Json(new { Result = "OK", Records = result, TotalRecordCount = totalRecords });
                 }
                 catch (Exception ex)
                 {
